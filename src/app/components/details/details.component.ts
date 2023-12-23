@@ -34,11 +34,9 @@ export class DetailsComponent {
   }
 
   async getHousingLocation() {
-    const housingLoactionId = Number(
-      this.route.snapshot.params['housingLocationId']
-    );
+    const housingLocationId = this.getHousingLocationId();
     this.housingLocation = await this.housingService.getHousingLocationById(
-      housingLoactionId
+      housingLocationId
     );
   }
 
@@ -49,5 +47,11 @@ export class DetailsComponent {
     this.applyForm.controls.lastName.setValue('');
     this.applyForm.controls.firstName.setValue('');
     this.applyForm.controls.email.setValue('');
+  }
+
+  getHousingLocationId(): number {
+    const params: any = this.route.snapshot.params;
+    const housingLoactionId = Number(params.housingLocationId);
+    return housingLoactionId;
   }
 }
